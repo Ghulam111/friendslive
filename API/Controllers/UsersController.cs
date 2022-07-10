@@ -3,6 +3,8 @@ using System.Security.Claims;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -29,13 +31,18 @@ namespace API.Controllers
 
         [HttpGet]
 
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery] UserParams userparams)
         {
-            var users = await _IUserrepository.GetMembersAsync();
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var user = await _IUserrepository.GetUserByUsernameAsync(username);
+
+            userparams.currentUsername = user.UserName;
+
+            var users = await _IUserrepository.GetMembersAsync(userparams);
+
+           Response.addPaginationHeaders(users.CurrentPage,users.TotalPages,users.TotalCount,users.PageSize);
 
             return Ok(users);
-
-
 
         }
 
@@ -52,6 +59,7 @@ namespace API.Controllers
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<MemberDTO> getuserbyUsername(string username)
         {
+
             return await _IUserrepository.getMemberAsync(username);
 
         }

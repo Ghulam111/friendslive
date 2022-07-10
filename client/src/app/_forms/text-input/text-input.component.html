@@ -7,7 +7,7 @@
         placeholder={{label}}
         class="form-control"
           [class.is-invalid]="ngControl.touched && ngControl.invalid"
-           placeholder="Confirm password"  >
+           placeholder="Confirm password" style="width:120% ;"  >
            
            <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">Please enter a {{label}}</div>
            <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">{{label}} must be atleast {{ngControl.control.errors.minlength['requiredLength']}}</div>
