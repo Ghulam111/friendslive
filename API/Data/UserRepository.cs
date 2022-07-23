@@ -76,10 +76,7 @@ namespace API.Data
             ,userparams.pageNumber,userparams.PageSize);
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _dbcontext.SaveChangesAsync() > 0;
-        }
+    
 
         public void Update(AppUser user)
         {

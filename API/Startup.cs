@@ -62,11 +62,15 @@ namespace API
             app.UseRouting();
             app.UseCors( u => u.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthorization(); 
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index","FallBack");
             });
         }
     }

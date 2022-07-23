@@ -1,16 +1,17 @@
 using API.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
-    public class AppUser
+    public class AppUser : IdentityUser<int>
     {
-        public int Id { get; set; } 
+        // public int Id { get; set; } 
 
-        public string UserName { get; set; }
+        // public string UserName { get; set; }
 
-        public byte[] passwordHash { get; set; }
+        // public byte[] passwordHash { get; set; }
 
-        public byte[] passwordSalt { get; set; }
+        // public byte[] passwordSalt { get; set; }
 
         public string knownAs { get; set; }
 
@@ -41,6 +42,8 @@ namespace API.Entities
         public ICollection<Message> MessageSent { get; set; }
 
         public ICollection<Message> MessageRecieved { get; set; }
+
+        public ICollection<AppUserRole> UserRole { get; set; }
 
         public int GetAge(){
 

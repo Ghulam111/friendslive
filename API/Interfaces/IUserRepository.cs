@@ -8,8 +8,7 @@ namespace API.Interfaces
     {
          void Update(AppUser user);
 
-         Task<bool> SaveAllAsync();
-
+        
          Task<AppUser> GetUserByIdAsync(int id);
 
          Task<IEnumerable<AppUser>> GetAllUsersAsync();
